@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS subjects;
 DROP TABLE IF EXISTS groups;
 DROP TABLE IF EXISTS group_enrollments;
 DROP TABLE IF EXISTS grades;
+DROP TABLE IF EXISTS subject_enrollments;
 SET FOREING_KEY_CHECKS = 1;
 
 CREATE TABLE people (
@@ -80,4 +81,12 @@ CREATE TABLE grades (
     PRIMARY KEY (grade_id), 
     FOREIGN KEY (student_id) REFERENCES students(student_id),
     FOREIGN KEY (group_id) REFERENCES groups(group_id)
+);
+
+CREATE TABLE subject_enrollments (
+    student_id INT, 
+    subject_id INT,
+    PRIMARY KEY (student_id, subject_id)
+    FOREIGN KEY (student_id) REFERENCES students(student_id)
+    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id)
 );
