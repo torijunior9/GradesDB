@@ -1,6 +1,7 @@
 SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS people;
 DROP TABLE IF EXISTS proffesors;
+DROP TABLE IF EXISTS students;
 SET FOREING_KEY_CHECKS = 1;
 
 CREATE TABLE people (
@@ -20,3 +21,11 @@ CREATE TABLE professors (
     PRIMARY KEY (professor_id),
     FOREIGN KEY (professor_id) REFERENCES people(person_id)
 );
+
+CREATE TABLE students (
+    student_id INT,
+    access_method VARCHAR(20) NOT NULL,
+    PRIMARY KEY (student_id),
+    FOREING KEY (student_id) REFERENCES people(person_id)
+);
+

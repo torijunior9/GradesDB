@@ -1,6 +1,11 @@
- -- Primero eliminados todos los datos de tabla en el caso de que los hubiese y después insertamos los datos iniciales.
+-- 1. BLOQUE DE LIMPIEZA
+SET FOREIGN_KEY_CHECKS = 0;
 DELETE FROM people;
-	
+DELETE FROM professors;
+DELETE FROM students;
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- 2. BLOQUE DE INSERCIÓN DE DATOS
 INSERT INTO people (person_id, dni, first_name, last_name, age, email) VALUES
     (1, '00000001A', 'David', 'Ruiz', 50, 'druiz@us.es'),
     (2, '00000002B', 'Inma', 'Hernández', 40, 'inmahernandez@us.es'),
@@ -28,14 +33,31 @@ INSERT INTO people (person_id, dni, first_name, last_name, age, email) VALUES
     (24, '10000024Z', 'Álex', 'Delgado', 22, 'alex.delgado@alum.us.es'),
     (25, '10000025A', 'Paula', 'Bermejo', 21, 'paula.bermejo@alum.us.es');
 
-SET FOREINGN_KEYS_CHECKS = 0;
-DELETE FROM people;
-DELETE FROM professors;
-SET FOREIGN_KEY_CHECKS = 1;
-
 INSERT INTO professors (professor_id, category) VALUES
     (1, 'Catedrático'),
     (2, 'Titular'),
     (3, 'AyudanteDoctor'),
     (4, 'Titular'),
     (5, 'Ayudante');
+
+INSERT INTO students (student_id, access_method) VALUES
+    (6, 'Selectividad'),
+    (7, 'Selectividad'),
+    (8, 'Selectividad'),
+    (9, 'Selectividad'),
+    (10, 'Selectividad'),
+    (11, 'Selectividad'),
+    (12, 'Selectividad'),
+    (13, 'Selectividad'),
+    (14, 'Selectividad'),
+    (15, 'Selectividad'),
+    (16, 'Selectividad'),
+    (17, 'Selectividad'),
+    (18, 'Selectividad'),
+    (19, 'Selectividad'),
+    (20, 'Selectividad'),
+    (21, 'Selectividad'),
+    (22, 'Selectividad'),
+    (23, 'Selectividad'),
+    (24, 'Selectividad'),
+    (25, 'Selectividad');
