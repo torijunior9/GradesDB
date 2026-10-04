@@ -1,4 +1,7 @@
+SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS people;
+DROP TABLE IF EXISTS proffesors;
+SET FOREING_KEY_CHECKS = 1;
 
 CREATE TABLE people (
     person_id INT AUTO_INCREMENT,
@@ -8,4 +11,12 @@ CREATE TABLE people (
     age TINYINT NOT NULL,
     email VARCHAR(255) NOT NULL,
     PRIMARY KEY (person_id)
+);
+
+
+CREATE TABLE professors (
+    professor_id INT,
+    category VARCHAR(30) NOT NULL,
+    PRIMARY KEY (professor_id),
+    FOREIGN KEY (professor_id) REFERENCES people(person_id)
 );
