@@ -9,6 +9,7 @@ DELETE FROM groups;
 DELETE FROM group_enrollments;
 DELETE FROM grades;
 DELETE FROM subject_enrollments;
+DELETE FROM teaching_loads;
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- 2. BLOQUE DE INSERCIÓN DE DATOS
@@ -162,3 +163,10 @@ INSERT INTO subject_enrollments (student_id, subject_id) VALUES
     (11, 11), (12, 11), (13, 11), (14, 11), (15, 11),
     (16, 11), (17, 11), (18, 11), (19, 11), (20, 11),
     (21, 11), (22, 11), (23, 11), (24, 11), (25, 11);
+
+INSER INTO teaching_loads (professor_id, group_id, credits) VALUES
+	(1, 1, 3.0),
+	(2, 1, 3.0),
+	(3, 2, 3.0),
+	(5, 3, 1.5),
+	(4, 3, 1.5);
