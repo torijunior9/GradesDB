@@ -3,6 +3,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 DELETE FROM people;
 DELETE FROM professors;
 DELETE FROM students;
+DELETE FROM degrees;
+DELETE FROM subjects;
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- 2. BLOQUE DE INSERCIÓN DE DATOS
@@ -88,4 +90,3 @@ INSERT INTO subjects (subject_id, degree_id, subject_name, acronym, credits, cou
     (16, 3, 'Sistemas Operativos', 'SO', 6, 2, 'Obligatoria'),
     (17, 3, 'Inteligencia Artificial', 'IA', 6, 2, 'Obligatoria');
 
-    
