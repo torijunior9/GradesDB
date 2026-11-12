@@ -248,7 +248,161 @@ SELECT g.group_name, g.activity, g.academic_year
 FROM groups g
 ORDER BY g.academic_year DESC, g.group_name ASC;
 
+SELECT
+st.first_name, 
+st.last_name,
+gr.group_name,
+gr.activity,
+gr.academic_year
+FROM v_students st
+JOIN students_groups ge ON st.student_id = ge.student_id
+JOIN groups gr ON ge.group_id = gr.group_id;
 
-	
+SELECT
+	d.degree_name,
+	s.subject_name,
+	s.acronym,
+	s.credits,
+	s.course,
+	s.subject_type
+FROM degrees d
+JOIN subjects s ON d.degree_id = s.degree_id
+ORDER BY d.degree_name, s.course;
+
+SELECT 
+	st.first_name,
+	st.last_name,
+	s.subject_name,
+	s.acronym,
+	g.grade_value,
+	g.exam_call,
+	gr.academic_year
+FROM grades g
+JOIN v_students st ON g.student_id = st.student_id
+JOIN groups gr ON g.group_id = gr.group_id
+JOIN subjects s ON gr.subject_id = s.subject_id;
+
+SELECT 
+	pr.first_name,
+	pr.last_name,
+	pr.category,
+	s.subject_name,
+	gr.activity,
+	tl.credits AS teaching_credit
+FROM v_professors pr
+JOIN teaching_loads tl ON pr.professor_id = tl.professor_id
+JOIN groups gr ON tl.group_id = gr.group_id
+JOIN subjects s ON gr.subject_id = s.subject_id;
+
+SELECT DISTINCT
+   st.first_name,
+   st.last_name,
+   s.subject_name,
+   s.acronym,
+   gr.academic_year
+FROM v_students st
+JOIN group_enrollments ge ON st.student_id = ge.student_id
+JOIN groups gr ON ge.group_id = gr.group_id
+JOIN subjects s ON gr.subject_id = s.subject_id
+ORDER BY st.last_name, s.subject_name;
+
+SELECT
+	st.access_method,
+	COUNT(*) AS total_students
+FROM students st
+GROUP BY st.access_method
+
+SELECT 
+	d.degree_name,
+	COUNT(*) AS total_subjects
+FROM degrees d
+JOIN subjects s ON d.degree_id = s.degree_id
+GROUP BY d.degree_id, d.degree_name;
+
+SELECT
+	s.subject_name,
+	s.acronym,
+	COUNT(*) AS total_groups
+FROM subjects s
+JOIN groups gr ON s.subject_id = gr.subject_id
+GROUP BY s.subject_id, s.subject_name, s.acronym;
+
+SELECT
+	g.exam_call,
+	AVG(g.grade_value) AS average_grade,
+	COUNT(*) AS total_grades
+FROM grades g
+GROUP BY g.exam_call;
+
+SELECT 
+	s.subject_name,
+	g.exam_call,
+	AVG(g.grade_value) AS average_grade,
+	COUNT(*) AS total_grades
+FROM grades g
+JOIN groups gr ON g.group_id = gr.group_id
+JOIN subjects s ON gr.subject_id = s.subject_id
+GROUP BY s.subject_id, s.subject_name, g.exam_call
+ORDER BY s.subject_name, g.exam_call
+
+SELECT
+	gr.academic_year,
+	COUNT(DISTINCT ge.student_id) AS total_students
+FROM groups gr
+JOIN group_enrollments ge ON gr.group_id = ge.group_id
+GROUP BY gr.academic_year
+ORDER BY gr.academic_year DESC;
+
+SELECT
+	pr.first_name, 
+	pr.last_name,
+	pr.category,
+	SUM(tl.credits) AS total_credits
+FROM v_professors pr
+JOIN teaching_loads tl ON pr.professor_id = tl.professor_id
+GROUP BY pr.professor_id, pr.first_name, pr.last_name, pr.category;
+
+
+SELECT
+	st.first_name,
+	st.last_name,
+	AVG(g.grade_value) AS average_grade
+FROM v_students st
+JOIN grades g ON st.student_id = g.student_id
+GROUP BY st.student_id, st.first_name, st.last_name
+HAVING AVG(g.grade_value) > 7;
+
+SELECT
+	s.subject_name,
+	COUNT(*) AS total_groups
+FROM subjects s 
+JOIN groups gr ON s.subject_id = gr.subject_id
+GROUP BY s.subject_id, s.subject_name
+HAVING COUNT(*) > 3;
+
+SELECT
+	gr.group_name, 
+	gr.activity,
+	COUNT(*) AS total_students
+FROM groups gr
+JOIN group_enrollments ge ON gr.group_id = ge.group_id
+GROUP BY gr.group_id, gr.group_name, gr.activity
+HAVING COUNT(*) > 15;
+
+SELECT
+	s.subject_name,
+	AVG(g.grade_value) AS average_grade,
+	COUNT(*) AS total_grades
+FROM subjects s
+JOIN groups gr ON s.subject_id = gr.subject_id
+JOIN grades g ON gr.group_id = g.group_id
+GROUP BY s.subject_id, s.subject_name
+HAVING AVG(g.grade_value) > 5.5;
+
+
+
+
+
+
 
 
